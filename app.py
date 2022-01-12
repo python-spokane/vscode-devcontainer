@@ -4,6 +4,8 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 import uvicorn
 
+import worker
+
 
 app = FastAPI(
     default_response_class=HTMLResponse,
@@ -13,6 +15,12 @@ app = FastAPI(
 @app.get("/")
 def index():
     return "<h1>Hello there 👋</h1>"
+
+
+@app.get("/send/")
+def send(message: str):
+    worker.send_message.delay(message)
+    return f"<h1>Sent message: {message}</h1>"
 
 
 if __name__ == "__main__":
