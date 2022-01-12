@@ -1,9 +1,15 @@
 {
     "name": "Python 3",
     "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
+        "dockerfile": "../Dockerfile",
+        "context": "..",
+        "args": {
+            "USERNAME": "vscode",
+            "USER_UID": "1000",
+            "USER_GID": "1000",
+        }
     },
+    "runArgs": ["--env-file", ".env"],
     "settings": {
         "python.defaultInterpreterPath": "/usr/bin/python"
     },
